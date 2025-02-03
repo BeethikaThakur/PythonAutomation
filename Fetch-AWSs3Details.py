@@ -6,6 +6,7 @@ AWS_ACCESS_KEY = ""#enter your access key
 AWS_SECRET_KEY = ""#enter your secret key
 BUCKET_NAME = ""#enter your bucket name
 REGION_NAME = ""#enter your region
+FILENAME=""#enter your path
 
 s3 = boto3.client(
     "s3",
@@ -24,7 +25,16 @@ def list_files_in_bucket(bucket_name):
     else:
         print("Bucket is empty.")
 
+def uploadfile(bucket_name,file_name):
+    """Upload fil to s3 bucket"""
+    s3.upload_file(
+    Filename=file_name,
+    Bucket=bucket_name,
+    Key="Pythonfirstupload.png"
+)
+
 if __name__ == "__main__":
     # List files in the S3 bucket
     print("Files in S3 bucket:")
     list_files_in_bucket(BUCKET_NAME)
+    uploadfile(BUCKET_NAME,FILENAME)
